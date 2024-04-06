@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bola : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float Velocidade = 65;
+    public float Velocidade = 10;
     void Start()
     {
       
@@ -38,5 +38,15 @@ public class Bola : MonoBehaviour
     void Update()
     {
         
+    }
+     void OnCollisionEnter(Collision batida)
+        
+    {
+        if ((batida.gameObject.name == "BEsquerda")  || (batida.gameObject.name == "BDireita")) 
+        {
+            transform.position = new Vector3(33, 0, 3);
+            Start();
+        }
+            
     }
 }
