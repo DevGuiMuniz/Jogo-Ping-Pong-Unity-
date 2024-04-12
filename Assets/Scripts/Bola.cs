@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Bola : MonoBehaviour
 {
     // Start is called before the first frame update
     public float Velocidade = 10;
+    public TMP_Text pontuacaoEsquerda;
+    public TMP_Text pontuacaoDireita;
+    int pontosEsquerda = 0;
+    int pontosDireita = 0;
+
     void Start()
     {
       
@@ -29,9 +35,11 @@ public class Bola : MonoBehaviour
             y = 1;
         }
         GetComponent<Rigidbody>().velocity = new Vector2(Velocidade *x, Velocidade*y);
+        pontuacaoDireita.SetText(pontosDireita.ToString());
+        pontuacaoEsquerda.SetText(pontosEsquerda.ToString());
 
-        
-        
+
+
     }
 
     // Update is called once per frame
@@ -42,11 +50,21 @@ public class Bola : MonoBehaviour
      void OnCollisionEnter(Collision batida)
         
     {
-        if ((batida.gameObject.name == "BEsquerda")  || (batida.gameObject.name == "BDireita")) 
+        if (batida.gameObject.name == "BEsquerda")  
         {
             transform.position = new Vector3(33, 0, 3);
+            pontosDireita++;
+            
+            Start();
+        } else if (batida.gameObject.name == "BDireita")
+        {
+            transform.position = new Vector3(33, 0, 3);
+            pontosEsquerda++;
+       
             Start();
         }
+
+        
             
     }
 }
